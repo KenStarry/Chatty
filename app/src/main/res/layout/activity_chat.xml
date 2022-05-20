@@ -120,7 +120,7 @@
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="@id/viewBackground"
-        app:layout_constraintTop_toBottomOf="@id/userAvailabilityHolder"/>
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter"/>
 
     <ProgressBar
         android:layout_width="@dimen/_25sdp"
@@ -168,6 +168,7 @@
         android:hint="@string/type_a_message"
         android:textColorHint="@color/secondary_text"
         android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
         android:paddingStart="@dimen/_16sdp"
         android:paddingEnd="@dimen/_16sdp"
         android:inputType="text"
