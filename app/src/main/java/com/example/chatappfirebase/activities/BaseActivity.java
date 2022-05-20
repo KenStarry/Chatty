@@ -31,7 +31,7 @@ public class BaseActivity extends AppCompatActivity {
         documentReference.update(Constants.KEY_AVAILABILITY, 0);
     }
 
-    //  The user is back online
+    //  When the app is in resumed state, the user is back online
     @Override
     protected void onResume() {
         super.onResume();
