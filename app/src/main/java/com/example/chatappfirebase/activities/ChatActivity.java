@@ -262,4 +262,12 @@ public class ChatActivity extends BaseActivity {
             conversationId = documentSnapshot.getId();
         }
     };
+
+    //  Listen for whether the user is online or not
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listenAvailabilityOfReceiver();
+    }
 }
