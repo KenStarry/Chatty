@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="?attr/colorPrimary"
+    tools:context=".activities.MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:id="@+id/profileImageHolder"
+        app:cardCornerRadius="@dimen/_50sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/userProfileImage"
+            android:scaleType="centerCrop"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:id="@+id/signOutImageHolder"
+        app:cardCornerRadius="@dimen/_50sdp"
+        app:cardBackgroundColor="?attr/colorPrimary"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:id="@+id/signOutImage"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_power_settings_new_24"
+            app:tint="@color/white"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/userName"
+        android:textSize="@dimen/_14ssp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintStart_toEndOf="@id/profileImageHolder"
+        app:layout_constraintTop_toTopOf="@id/profileImageHolder"
+        app:layout_constraintEnd_toStartOf="@id/signOutImageHolder"
+        app:layout_constraintBottom_toBottomOf="@id/profileImageHolder"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/background_content_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileImageHolder">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/conversationsRecyclerView"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:padding="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fabNewChat"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@color/primary"
+        app:tint="@color/white"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

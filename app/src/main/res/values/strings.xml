@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Chat App Firebase</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_to_continue">Login to continue</string>
+    <string name="hint_email_address">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="select_user">select user</string>
+    <string name="type_a_message">Type a message</string>
+</resources>
