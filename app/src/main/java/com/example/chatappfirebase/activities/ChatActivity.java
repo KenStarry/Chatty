@@ -116,6 +116,14 @@ public class ChatActivity extends BaseActivity {
                             isReceiverAvailable = availability == 1;
                         }
                     }
+                    //  If the user is online, do...
+                    if (isReceiverAvailable) {
+                        binding.availabilityOnline.setVisibility(View.VISIBLE);
+                        binding.availabilityOffline.setVisibility(View.GONE);
+                    } else {
+                        binding.availabilityOnline.setVisibility(View.GONE);
+                        binding.availabilityOffline.setVisibility(View.VISIBLE);
+                    }
                 });
     }
 
