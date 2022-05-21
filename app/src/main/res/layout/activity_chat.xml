@@ -99,8 +99,8 @@
         />
 
     <FrameLayout
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
         android:id="@+id/layoutSend"
         android:layout_marginEnd="@dimen/_16sdp"
         android:layout_marginRight="@dimen/_16sdp"
@@ -108,20 +108,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="@dimen/_30sdp"
-            app:cardBackgroundColor="@color/primary_dark">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:background="@color/primary_dark"
+            android:src="@drawable/ic_baseline_send_24"
+            app:riv_corner_radius="@dimen/_90sdp" />
 
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/ic_baseline_send_24"
-                android:layout_gravity="center"
-                app:tint="@color/white"/>
-
-        </androidx.cardview.widget.CardView>
     </FrameLayout>
 
     <EditText

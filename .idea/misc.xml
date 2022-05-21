@@ -11,6 +11,9 @@
         <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/drawable/background_input.xml" value="0.156" />
         <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/drawable/background_received_message.xml" value="0.1" />
         <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/drawable/background_sent_message.xml" value="0.1" />
+        <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/drawable/circular.xml" value="0.1" />
+        <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.1395" />
+        <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/drawable/image.xml" value="0.1" />
         <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/layout/activity_chat.xml" value="0.25" />
         <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
         <entry key="..\:/Programming/Android/Projects/ChatAppFirebase/app/src/main/res/layout/activity_sign_in.xml" value="0.22447916666666667" />
