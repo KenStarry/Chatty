@@ -1,5 +1,7 @@
 package com.example.chatappfirebase.utilities;
 
+import java.util.HashMap;
+
 public class Constants {
     //  Collections as they will be stored in firebase
     public static final String KEY_COLLECTION_USERS = "users";
@@ -32,5 +34,28 @@ public class Constants {
 
     //  Handling user Availability
     public static final String KEY_AVAILABILITY = "availability";
+
+    //  Handling push notifications (Copy Server Key from Firebase Cloud Messaging)
+    public static final String REMOTE_MSG_AUTHORIZATION = "Authorization";
+    public static final String REMOTE_MSG_CONTENT_TYPE = "Content-Type";
+    public static final String REMOTE_MSG_DATA = "data";
+    public static final String REMOTE_MSG_REGISTRATION_IDS = "registration_ids";
+
+    //  Key
+    public static HashMap<String, String> remoteMsgHeaders = null;
+    public static HashMap<String, String> getRemoteMsgHeaders() {
+        if(remoteMsgHeaders == null) {
+            remoteMsgHeaders = new HashMap<>();
+            remoteMsgHeaders.put(
+                    REMOTE_MSG_AUTHORIZATION,
+                    "key=AAAAvxq4S1k:APA91bGXX09iLNOuJJlhSikBBbOzsvY-rggj6s71fOmZjF-sP-NTYCwvVvpH3OtvxvVfFLC3yF1lotoD647HJSwnzjAvnwrs4HTOYn_-Uf9rzDxc2Og9gBDjrnIA1wrN-U9MJLK831WR"
+            );
+            remoteMsgHeaders.put(
+                    REMOTE_MSG_CONTENT_TYPE,
+                    "application/json"
+            );
+        }
+        return remoteMsgHeaders;
+    }
 
 }
