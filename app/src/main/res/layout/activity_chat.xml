@@ -74,40 +74,6 @@
         app:layout_constraintTop_toBottomOf="@id/imageBack"
         android:layout_marginTop="@dimen/_12sdp"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/userAvailabilityHolder"
-        app:layout_constraintTop_toBottomOf="@id/viewSupporter">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/availabilityOnline"
-            android:text="@string/online"
-            android:textAlignment="center"
-            android:textColor="#008000"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:visibility="gone"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/availabilityOffline"
-            android:text="@string/offline"
-            android:textAlignment="center"
-            android:textColor="@color/error"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:visibility="visible"/>
-
-    </FrameLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
@@ -178,5 +144,39 @@
         app:layout_constraintBottom_toBottomOf="@id/layoutSend"
         app:layout_constraintEnd_toStartOf="@id/layoutSend"
         app:layout_constraintTop_toTopOf="@id/layoutSend"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userAvailabilityHolder"
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/availabilityOnline"
+            android:text="@string/online"
+            android:textAlignment="center"
+            android:textColor="#008000"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/availabilityOffline"
+            android:text="@string/offline"
+            android:textAlignment="center"
+            android:textColor="@color/error"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:visibility="visible"/>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

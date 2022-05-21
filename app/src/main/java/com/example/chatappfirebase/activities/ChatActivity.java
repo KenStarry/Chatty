@@ -5,11 +5,16 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.chatappfirebase.adapters.ChatAdapter;
 import com.example.chatappfirebase.databinding.ActivityChatBinding;
 import com.example.chatappfirebase.models.ChatMessage;
 import com.example.chatappfirebase.models.User;
+import com.example.chatappfirebase.network.ApiClient;
+import com.example.chatappfirebase.network.ApiService;
 import com.example.chatappfirebase.utilities.Constants;
 import com.example.chatappfirebase.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +25,10 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +37,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatActivity extends BaseActivity {
 
@@ -97,8 +110,78 @@ public class ChatActivity extends BaseActivity {
             addConversationToDatabase(conversation);
         }
 
+        //  To enable sending of notifications
+        if (!isReceiverAvailable) {
+            try {
+                JSONArray tokens = new JSONArray();
+                tokens.put(receiverUser.token);
+
+                JSONObject data = new JSONObject();
+                data.put(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
+                data.put(Constants.KEY_NAME, preferenceManager.getString(Constants.KEY_NAME));
+                data.put(Constants.KEY_FCM_TOKEN, preferenceManager.getString(Constants.KEY_FCM_TOKEN));
+                data.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString());
+
+                JSONObject body = new JSONObject();
+                body.put(Constants.REMOTE_MSG_DATA, data);
+                body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
+
+                sendNotification(body.toString());
+
+            } catch (Exception e) {
+                showToast(e.getMessage());
+            }
+        }
+
         //  Set the input text back to null
         binding.inputMessage.setText(null);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    //  Method to send notification when message is received
+    private void sendNotification(String messageBody) {
+        ApiClient.getClient().create(ApiService.class).sendMessage(
+                Constants.getRemoteMsgHeaders(),
+                messageBody
+        ).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+
+                //  If message response is successful, do...
+                if (response.isSuccessful()) {
+
+                    try {
+
+                        if (response.body() != null) {
+                            JSONObject responseJson = new JSONObject(response.body());
+                            JSONArray results = responseJson.getJSONArray("results");
+
+                            if (responseJson.getInt("failure") == 1) {
+                                JSONObject error = (JSONObject) results.get(0);
+                                showToast(error.getString("error"));
+                                return;
+                            }
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    showToast("Notification Sent Successfully");
+
+                } else {
+                    showToast("Error : " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                showToast(t.getMessage());
+            }
+        });
     }
 
     //  Listen for the broadcast receiver

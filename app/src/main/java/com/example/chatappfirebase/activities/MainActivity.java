@@ -159,6 +159,8 @@ public class MainActivity extends BaseActivity implements ConversationListener {
 
     //  method to update token once a user signs out
     private void updateToken(String token) {
+        //  To help with the notifications
+        preferenceManager.putString(Constants.KEY_FCM_TOKEN, token);
 
         //  Get instance of Firestore database
         FirebaseFirestore database = FirebaseFirestore.getInstance();

@@ -1,9 +1,24 @@
 package com.example.chatappfirebase.firebase;
 
-import androidx.annotation.NonNull;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import com.example.chatappfirebase.R;
+import com.example.chatappfirebase.activities.ChatActivity;
+import com.example.chatappfirebase.models.User;
+import com.example.chatappfirebase.utilities.Constants;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Random;
 
 public class MessagingService extends FirebaseMessagingService {
 
@@ -13,7 +28,51 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
     @Override
-    public void onMessageReceived(@NonNull RemoteMessage message) {
-        super.onMessageReceived(message);
+    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        super.onMessageReceived(remoteMessage);
+
+        User user = new User();
+        user.id = remoteMessage.getData().get(Constants.KEY_USER_ID);
+        user.name = remoteMessage.getData().get(Constants.KEY_NAME);
+        user.token = remoteMessage.getData().get(Constants.KEY_FCM_TOKEN);
+
+        int notificationId = new Random().nextInt();
+        String channelId = "chat_message";
+
+        //  Open the chat inbox directly when notification is received
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(Constants.KEY_USER, user);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        //  Build the notification popup
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
+        builder.setSmallIcon(R.drawable.ic_notifications);
+        builder.setContentTitle(user.name);
+        builder.setContentText(remoteMessage.getData().get(Constants.KEY_MESSAGE));
+        builder.setStyle(new NotificationCompat.BigTextStyle().bigText(
+                remoteMessage.getData().get(Constants.KEY_MESSAGE)
+        ));
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true);
+        builder.setVibrate(new long[] {1000, 1000, 1000, 1000, 1000});
+
+        //  If the build version is android Oreo and above (API 26 and above), do...
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence channelName = "Chat Message";
+            String channelDescription = "This Notification channel is for chat message notifications";
+
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+            notificationChannel.setDescription(channelDescription);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(notificationId, builder.build());
+
     }
 }
